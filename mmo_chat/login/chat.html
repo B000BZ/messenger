@@ -96,7 +96,7 @@
         }
         .chat .chat-history ul li {
             list-style: none;
-            margin-bottom: 30px;
+            margin-bottom: 6px;
         }
         .chat .chat-history ul li:last-child {
             margin-bottom: 0px;
@@ -108,19 +108,29 @@
             border-radius: 40px;
             width: 40px;
         }
-        .chat .chat-history .message-data-time {
+        .message-data-time {
+            display: block;
+            color: #999;
+            font-size: 9px;
+            margin-top: 2px;
+            text-align: right;
+            margin-left: 55px;
+        }
+        .chat .chat-history {
             color: #514343;
             padding-right: 6px;
         }
         .chat .chat-history .message {
             color: #444;
-            padding: 18px 20px;
-            line-height: 26px;
+            line-height: 16px;
             font-size: 16px;
             border-radius: 7px;
             display: inline-block;
             position: relative;
             max-width: 60%;
+            padding-top: 5px;
+            padding-right: 5px;
+            padding-left: 10px;
         }
         .chat .chat-history .message.sent {
             background: #dcf8c6;
@@ -223,9 +233,7 @@
                         <div class="chat-history fade-in" id="chat-messages">
                             <ul class="m-b-0">
                                 <li class="clearfix">
-                                    <div class="message-data text-right">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                    </div>
+
                                     <div class="message received float-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                                 </li>
                                 <li class="clearfix">
@@ -235,9 +243,7 @@
                                     <div class="message sent"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                                 </li>
                                 <li class="clearfix">
-                                    <div class="message-data text-right">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                    </div>
+
                                     <div class="message received float-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                                 </li>
                                 <li class="clearfix">
@@ -276,14 +282,14 @@
                     chatMessages.innerHTML = `
                     <ul class="m-b-0">
                         <li class="clearfix">
-                            <div class="message received float-right"> Hi ${user}, how are you? </div>
-                            <span class="message-data-time">10:10 AM, Today</span>
+                            <div class="message received float-right"> Hi ${user}, how are you?
+                            <span class="message-data-time">10:10</span>
+                            </div>
                         </li>
                         <li class="clearfix">
-                            <div class="message-data">
-                                <span class="message-data-time">10:12 AM, Today</span>
+                            <div class="message sent"> I'm good, thank you! How about you?
+                            <span class="message-data-time">10:10</span>
                             </div>
-                            <div class="message sent"> I'm good, thank you! How about you? </div>
                         </li>
                     </ul>
                 `;
@@ -292,48 +298,70 @@
                     chatMessages.innerHTML = `
                     <ul class="m-b-0">
                     <li class="clearfix">
-                            <div class="message-data">
-                                <span class="message-data-time">Wed, 02 Oct</span>
+                    <div
+                            <div class="message received"> Salam
+                                <span class="message-data-time">10:10</span>
                             </div>
-                            <div class="message received"> Salam </div>
+
+
 
                         </li>
                         <li class="clearfix">
-                            <div class="message received"> cv elik? </div>
+                            <div class="message received"> cv elik?
+                                <span class="message-data-time">10:10</span>
+                            </div>
                         </li>
                         <li class="clearfix">
 
-                            <div class="message sent float-right"> salam hmd chkon meaya?? </div>
+                            <div class="message sent float-right"> salam hmd chkon meaya??
+                                <span class="message-data-time">10:10</span>
+                            </div>
                         </li>
 
                         </li>
                         <li class="clearfix">
-                            <div class="message received"> ana jark awah ma3rftinich hhh </div>
+                            <div class="message received"> ana jark awah ma3rftinich hhh
+                                <span class="message-data-time">10:10</span>
+                            </div>
                         </li>
                         <li class="clearfix">
 
-                            <div class="message sent float-right"> chkon? la smhlia ma3rftkch </div>
-
+                            <div class="message sent float-right"> chkon? la smhlia ma3rftkch
+                                <span class="message-data-time">10:10</span>
+                            </div>
                         </li>
                         <li class="clearfix">
 
-                            <div class="message received"> ana sakn f 4eme hdaak aw z3ma hna jiran hhh </div>
+                            <div class="message received"> ana sakn f 4eme hdaak aw z3ma hna jiran hhh
+                                <span class="message-data-time">10:10</span>
+                            </div>
                         </li>
                         <li class="clearfix">
 
-                            <div class="message sent float-right"> la smhlia ma3rftkch </div>
+                            <div class="message sent float-right"> la smhlia ma3rftkch
+                            <span class="message-data-time">10:10</span>
+                            </div>
+
                         </li>
                         <li class="clearfix">
-                            <div class="message received"> machi mochkil hhh </div>
+                            <div class="message received"> machi mochkil hhh
+                            <span class="message-data-time">10:10</span>
+                            </div>
                         </li>
                         <li class="clearfix">
-                            <div class="message received"> iwa chkat3awdi omor mzyana? </div>
+                            <div class="message received"> iwa chkat3awdi omor mzyana?
+                            <span class="message-data-time">10:10</span>
+                            </div>
                         </li>
                         <li class="clearfix">
-                            <div class="message received"> mhm ana sift lik saraha makrhtch nt3rf elik ot3rfi 3liya </div>
+                            <div class="message received"> mhm ana sift lik saraha makrhtch nt3rf elik ot3rfi 3liya
+                            <span class="message-data-time">10:10</span>
+                            </div>
                         </li>
                         <li class="clearfix">
-                            <div class="message received"> majawbtinich a salomaa </div>
+                            <div class="message received"> majawbtinich a salomaa
+                            <span class="message-data-time">10:10</span>
+                            </div>
                         </li>
 
 
@@ -347,14 +375,16 @@
                             <div class="message-data text-right">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
                             </div>
-                            <div class="message received float-right"> Hi ${user}, how are you? </div>
-                            <span class="message-data-time">10:10 AM, Today</span>
+                            <div class="message received float-right"> Hi ${user}, how are you?
+                            <span class="message-data-time">10:10  </span>
+                            </div>
+
                         </li>
                         <li class="clearfix">
-                            <div class="message-data">
-                                <span class="message-data-time">10:12 AM, Today</span>
+
+                            <div class="message sent"> I'm good, thank you! How about you?
+                            <span class="message-data-time">10:10</span>
                             </div>
-                            <div class="message sent"> I'm good, thank you! How about you? </div>
                         </li>
                     </ul>
                 `;
@@ -373,8 +403,10 @@
                     <div class="message-data text-right">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
                     </div>
-                    <div class="message sent float-right">${messageText}</div>
-                    <span class="message-data-time sent">10:10 AM, Today</span>
+                    <div class="message sent float-right">${messageText}
+                    <span class="message-data-time">10:10</span>
+                    </div>
+
                 `;
                 document.querySelector('#chat-messages ul').appendChild(messageElement);
                 messageInput.value = '';
