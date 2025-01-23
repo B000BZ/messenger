@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.cdnfonts.com/css/helvetica-neue-5" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
     <style>
         body {
             background-color: #f4f7f6;
             margin-top: 20px;
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
         .card {
             background: #fff;
@@ -109,12 +111,14 @@
             width: 40px;
         }
         .message-data-time {
+            position: absolute;
+            right: 5px;
+            bottom: 2px;
             display: block;
             color: #999;
             font-size: 9px;
             margin-top: 2px;
             text-align: right;
-            margin-left: 55px;
         }
         .chat .chat-history {
             color: #514343;
@@ -128,9 +132,7 @@
             display: inline-block;
             position: relative;
             max-width: 60%;
-            padding-top: 5px;
-            padding-right: 5px;
-            padding-left: 10px;
+            padding: 5px 40px 8px 10px;
         }
         .chat .chat-history .message.sent {
             background: #dcf8c6;
@@ -172,6 +174,18 @@
         }
         .input-group .btn {
             border-radius: 20px;
+        }
+
+        .date-box {
+            display: block;
+            width: fit-content;
+            margin: 10px auto;
+            padding: 5px 10px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #555;
+            text-align: center;
         }
     </style>
 </head>
@@ -233,26 +247,15 @@
                         <div class="chat-history fade-in" id="chat-messages">
                             <ul class="m-b-0">
                                 <li class="clearfix">
-
-                                    <div class="message received float-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                </li>
-                                <li class="clearfix">
-                                    <div class="message-data">
-
+                                    <div class="message received float-right"> Hi Mama, how are you?
+                                        <span class="message-data-time">10:10</span>
                                     </div>
-                                    <div class="message sent"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                                 </li>
                                 <li class="clearfix">
-
-                                    <div class="message received float-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                                </li>
-                                <li class="clearfix">
-                                    <div class="message-data">
-
+                                    <div class="message sent"> I'm good, thank you! How about you?
+                                        <span class="message-data-time">10:10</span>
                                     </div>
-                                    <div class="message sent"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                                 </li>
-
                             </ul>
                         </div>
                         <div class="chat-message clearfix">
@@ -297,14 +300,12 @@
                 else if (user == '+212 99 82 88 00'){
                     chatMessages.innerHTML = `
                     <ul class="m-b-0">
+                    <div class="date-box">Today</div>
                     <li class="clearfix">
                     <div
                             <div class="message received"> Salam
                                 <span class="message-data-time">10:10</span>
                             </div>
-
-
-
                         </li>
                         <li class="clearfix">
                             <div class="message received"> cv elik?
@@ -372,16 +373,11 @@
                     chatMessages.innerHTML = `
                     <ul class="m-b-0">
                         <li class="clearfix">
-                            <div class="message-data text-right">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                            </div>
                             <div class="message received float-right"> Hi ${user}, how are you?
                             <span class="message-data-time">10:10  </span>
                             </div>
-
                         </li>
                         <li class="clearfix">
-
                             <div class="message sent"> I'm good, thank you! How about you?
                             <span class="message-data-time">10:10</span>
                             </div>
@@ -400,9 +396,7 @@
                 const messageElement = document.createElement('li');
                 messageElement.classList.add('clearfix');
                 messageElement.innerHTML = `
-                    <div class="message-data text-right">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                    </div>
+
                     <div class="message sent float-right">${messageText}
                     <span class="message-data-time">10:10</span>
                     </div>
