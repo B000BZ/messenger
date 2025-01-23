@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            background: #fff;
+            transition: .5s;
+            border: 0;
+            margin-bottom: 30px;
+            
+            border-radius: .55rem;
+            position: relative;
+            width: 100%;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+        }
+        .chat-app .people-list {
+            width: 280px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 20px;
+            z-index: 7;
+        }
+        .chat-app .chat {
+            margin-left: 280px;
+            border-left: 1px solid #eaeaea;
+        }
+        .people-list {
+            transition: .5s;
+        }
+        .people-list .chat-list li {
+            padding: 10px 15px;
+            list-style: none;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .people-list .chat-list li:hover {
+            background: #efefef;
+            cursor: pointer;
+        }
+        .people-list .chat-list li.active {
+            background: #efefef;
+        }
+        .people-list .chat-list li .name {
+            font-size: 15px;
+        }
+        .people-list .chat-list img {
+            width: 45px;
+            border-radius: 50%;
+        }
+        .people-list img {
+            float: left;
+            border-radius: 50%;
+        }
+        .people-list .about {
+            float: left;
+            padding-left: 8px;
+        }
+        .people-list .status {
+            color: #999;
+            font-size: 13px;
+        }
+        .chat .chat-header {
+            padding: 15px 20px;
+            border-bottom: 2px solid #f4f7f6;
+        }
+        .chat .chat-header img {
+            float: left;
+            border-radius: 40px;
+            width: 40px;
+        }
+        .chat .chat-header .chat-about {
+            float: left;
+            padding-left: 10px;
+        }
+        .chat .chat-history {
+            padding: 20px;
+            border-bottom: 2px solid #f4f7f6;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .chat .chat-history.fade-in {
+            opacity: 1;
+        }
+        .chat .chat-history ul {
+            padding: 0;
+        }
+        .chat .chat-history ul li {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        .chat .chat-history ul li:last-child {
+            margin-bottom: 0px;
+        }
+        .chat .chat-history .message-data {
+            margin-bottom: 15px;
+        }
+        .chat .chat-history .message-data img {
+            border-radius: 40px;
+            width: 40px;
+        }
+        .chat .chat-history .message-data-time {
+            color: #514343;
+            padding-right: 6px;
+        }
+        .chat .chat-history .message {
+            color: #444;
+            padding: 18px 20px;
+            line-height: 26px;
+            font-size: 16px;
+            border-radius: 7px;
+            display: inline-block;
+            position: relative;
+            max-width: 60%;
+        }
+        .chat .chat-history .message.sent {
+            background: #dcf8c6;
+            align-self: flex-end;
+        }
+        .chat .chat-history .message.received {
+            background: #f1f0f0;
+            align-self: flex-start;
+        }
+        .chat .chat-message {
+            padding: 20px;
+        }
+        .online, .offline, .me {
+            margin-right: 3px;
+            font-size: 10px;
+        }
+        .online {
+            color: #86c541;
+        }
+        .offline {
+            color: #e47297;
+        }
+        .me {
+            color: #1d8ecd;
+        }
+        .float-right {
+            float: right;
+        }
+        .clearfix:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+        .input-group .form-control {
+            border-radius: 20px;
+        }
+        .input-group .btn {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <img src="images/messageslogo.png" alt="Logo" height="100" style="margin-left: 20px">
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card chat-app">
+                    <div id="plist" class="people-list">
+                        <ul class="list-unstyled chat-list mt-2 mb-0" id="user-list">
+                            <li class="clearfix active" onclick="loadChat('Mama', 'images/pfps/mamaPfp.jpg', this)">
+                                <img src="images/pfps/mamaPfp.jpg" alt="avatar">
+                                <div class="about">
+                                    <div class="name">Mama</div>
+
+                                </div>
+                            </li>
+                            <li class="clearfix" onclick="loadChat('+212 99 82 88 00', 'images/pfps/+21299828800Pfp.jpg', this)">
+                                <img src="images/pfps/+21299828800Pfp.jpg" alt="avatar">
+                                <div class="about">
+                                    <div class="name">+212 99 82 88 00</div>
+
+                                </div>
+                            </li>
+                            <li class="clearfix" onclick="loadChat('Amal', 'images/pfps/amalPfp.jpg', this)">
+                                <img src="images/pfps/amalPfp.jpg" alt="avatar">
+                                <div class="about">
+                                    <div class="name">Amal</div>
+
+                                </div>
+                            </li>
+                            <li class="clearfix" onclick="loadChat('Coworker', 'images/pfps/coworkerPfp.jpg', this)">
+                                <img src="images/pfps/coworkerPfp.jpg" alt="avatar">
+                                <div class="about">
+                                    <div class="name">Coworker</div>
+
+                                </div>
+                            </li>
+                            <li class="clearfix" onclick="loadChat('Yves rocher', 'images/pfps/yvesRocherPfp.jpg', this)">
+                                <img src="images/pfps/yvesRocherPfp.jpg" alt="avatar">
+                                <div class="about">
+                                    <div class="name">Yves rocher</div>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="chat">
+                        <div class="chat-header clearfix">
+                            <img src="images/pfps/mamaPfp.jpg" alt="avatar" id="chat-avatar">
+                            <div class="chat-about">
+                                <div class="name" id="chat-with">Mama</div>
+                            </div>
+                        </div>
+                        <div class="chat-history fade-in" id="chat-messages">
+                            <ul class="m-b-0">
+                                <li class="clearfix">
+                                    <div class="message-data text-right">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                                    </div>
+                                    <div class="message received float-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="message-data">
+
+                                    </div>
+                                    <div class="message sent"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="message-data text-right">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                                    </div>
+                                    <div class="message received float-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="message-data">
+
+                                    </div>
+                                    <div class="message sent"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="chat-message clearfix">
+                            <div class="input-group mb-0">
+                                <input type="text" class="form-control" placeholder="Enter text here..." id="message-input" enabled>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" onclick="sendMessage()" enabled>Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function loadChat(user, avatar, element) {
+            document.getElementById('chat-with').innerText = user;
+            document.getElementById('chat-avatar').src = avatar;
+            document.querySelectorAll('.people-list .chat-list li').forEach(li => li.classList.remove('active'));
+            element.classList.add('active');
+            
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.classList.remove('fade-in');
+            setTimeout(() => {
+                if (user == 'Mama'){
+                    chatMessages.innerHTML = `
+                    <ul class="m-b-0">
+                        <li class="clearfix">
+                            <div class="message received float-right"> Hi ${user}, how are you? </div>
+                            <span class="message-data-time">10:10 AM, Today</span>
+                        </li>
+                        <li class="clearfix">
+                            <div class="message-data">
+                                <span class="message-data-time">10:12 AM, Today</span>
+                            </div>
+                            <div class="message sent"> I'm good, thank you! How about you? </div>
+                        </li>
+                    </ul>
+                `;
+                }
+                else if (user == '+212 99 82 88 00'){
+                    chatMessages.innerHTML = `
+                    <ul class="m-b-0">
+                    <li class="clearfix">
+                            <div class="message-data">
+                                <span class="message-data-time">Wed, 02 Oct</span>
+                            </div>
+                            <div class="message received"> Salam </div>
+
+                        </li>
+                        <li class="clearfix">
+                            <div class="message received"> cv elik? </div>
+                        </li>
+                        <li class="clearfix">
+
+                            <div class="message sent float-right"> salam hmd chkon meaya?? </div>
+                        </li>
+
+                        </li>
+                        <li class="clearfix">
+                            <div class="message received"> ana jark awah ma3rftinich hhh </div>
+                        </li>
+                        <li class="clearfix">
+
+                            <div class="message sent float-right"> chkon? la smhlia ma3rftkch </div>
+
+                        </li>
+                        <li class="clearfix">
+
+                            <div class="message received"> ana sakn f 4eme hdaak aw z3ma hna jiran hhh </div>
+                        </li>
+                        <li class="clearfix">
+
+                            <div class="message sent float-right"> la smhlia ma3rftkch </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="message received"> machi mochkil hhh </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="message received"> iwa chkat3awdi omor mzyana? </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="message received"> mhm ana sift lik saraha makrhtch nt3rf elik ot3rfi 3liya </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="message received"> majawbtinich a salomaa </div>
+                        </li>
+
+
+                    </ul>
+                `;
+                }
+                else if (user == 'Amal'){
+                    chatMessages.innerHTML = `
+                    <ul class="m-b-0">
+                        <li class="clearfix">
+                            <div class="message-data text-right">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                            </div>
+                            <div class="message received float-right"> Hi ${user}, how are you? </div>
+                            <span class="message-data-time">10:10 AM, Today</span>
+                        </li>
+                        <li class="clearfix">
+                            <div class="message-data">
+                                <span class="message-data-time">10:12 AM, Today</span>
+                            </div>
+                            <div class="message sent"> I'm good, thank you! How about you? </div>
+                        </li>
+                    </ul>
+                `;
+                }
+                chatMessages.classList.add('fade-in');
+            }, 100);
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message-input');
+            const messageText = messageInput.value;
+            if (messageText.trim() !== '') {
+                const messageElement = document.createElement('li');
+                messageElement.classList.add('clearfix');
+                messageElement.innerHTML = `
+                    <div class="message-data text-right">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                    </div>
+                    <div class="message sent float-right">${messageText}</div>
+                    <span class="message-data-time sent">10:10 AM, Today</span>
+                `;
+                document.querySelector('#chat-messages ul').appendChild(messageElement);
+                messageInput.value = '';
+                messageInput.focus();
+            }
+        }
+    </script>
+</body>
+</html>
